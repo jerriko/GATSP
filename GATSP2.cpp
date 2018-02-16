@@ -40,7 +40,7 @@ vector<vector<long> > dupeCheck(vector<vector<long> > Gen) {
 		for (int j = i; j < GENERATION_SIZE;j++) {
 			if (Gen[i] == Gen[j] && i!=j) {
 				Gen[j] = randTour(fitness(Gen[i]));
-				cout << "dupe found" <<endl;
+				//cout << "dupe found" <<endl;
 			}
 		}
 	}
@@ -75,8 +75,11 @@ int main() {
 	
 	//Selection process
 	/**************************************/
+	//cout << "Calculating.";
 	for (long r = 0; r <RUNS ;r++) {
 		
+		if((r%100)==(RUNS%100))
+			cout << "." << endl;
 		//run fitness functions. looks messy, but scope requires it stays here :/ 
 		for (i = 0; i < Gen.size(); i++) {
 			fit[i] = fitness(Gen[i]);
@@ -92,7 +95,7 @@ int main() {
 					myfile <<  champTour.at(n) << ", ";
 				myfile <<  endl;
 
-				cout << t1 << " " << eliteFit << endl;
+				//cout << t1 << " " << eliteFit << endl;
 			}
 		}
 		//sort our population from most to least fit
