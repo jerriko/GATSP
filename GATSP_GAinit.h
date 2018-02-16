@@ -11,13 +11,13 @@
 #include <string>
 #include <utility>
 
-#define GENERATION_SIZE 20
+#define GENERATION_SIZE 4
 #define RUNS 10000
 #define VSIZE 101
 #define OPTFREQ 70
 #define MUTE 5
 using namespace std;
-string file = "C:/Temp/NSC400/eil101.txt";
+string file = "C:/Temp/NSC400/GATSP/eil101.txt";
 long rr;
 //Counter variables
 long i, j, k, l , m , n, z=0, u, eliteTour, c1, c2, swapper,swap2,eliteRun;
@@ -56,7 +56,7 @@ double * BubbleSort(double * sortinglist) {
 
 void writeTour(vector<long> tour) {
 	ofstream tourFile;
-	tourFile.open("C:/Temp/NSC400/Tour.txt");
+	tourFile.open("C:/Temp/NSC400/GATSP/Tour.txt");
 	for (i = 0; i< tour.size();i++) {
 		tourFile << i << " "<< weights[tour[i]][0] << " " << weights[tour[i]][1] << endl;
 	}
