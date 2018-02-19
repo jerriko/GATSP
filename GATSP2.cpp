@@ -5,8 +5,8 @@ vector<long> twoOpt (vector<long> tour) {
 	//cout << "Entering 2opt" << endl;
 	vector<long> opt;
 	vector<long> ropt;
-	for (long i = 1; i<VSIZE-2;i++) {
-		for (long j = i+1; j<VSIZE-1;j++) {
+	for (long i = 1; i<vsize-2;i++) {
+		for (long j = i+1; j<vsize-1;j++) {
 			opt.push_back(tour[0]);
 			opt.insert(opt.begin()+1,tour.begin() + 1, tour.begin()+i);
 			//prTour(opt);
@@ -16,7 +16,7 @@ vector<long> twoOpt (vector<long> tour) {
 			opt.insert(opt.begin()+i,ropt.begin(),ropt.end());
 			ropt.clear();
 			opt.insert(opt.begin() + j+1,tour.begin()+j+1,tour.end()-1);
-			opt.push_back(tour.at(VSIZE));
+			opt.push_back(tour.at(vsize));
 			//prTour(opt);
 			if(fitness(opt)<fitness(tour)) {	
 				tour = opt;
@@ -47,13 +47,24 @@ vector<vector<long> > dupeCheck(vector<vector<long> > Gen) {
 	
 	return Gen;
 }
-
-int main() {
+void setArgs(int argc, char* argv[]) {
+	if (argc < 3)
+		exit(1);
+	cout << "you entered " << argc << " arguments"<< endl;
+	cout << "your arguments are: " << endl;
+	for (int i = 1;i<argc; i+=2) {
+		Function* func = functions.getFunction(argv[i]);
+		cout << "command: " << (*func)(argv[i+1]) << endl;
+	}
+}
+int main(int argc, char* argv[]) {
+	
 	srand((unsigned)time(0));
 	//initialize environment
 	/**************************************/
 	//map and file variables
-	for (i = 0; i <VSIZE;++i) 
+	setArgs(argc,argv);
+	for (i = 0; i <vsize;++i) 
 		weights[i] = new long[2];
 	ofstream myfile;
 	myfile.open("tours.txt");
@@ -91,7 +102,7 @@ int main() {
 				champTour = Gen[i];
 				t1=clock()-t;
 				myfile << "Best tour: " << eliteTour << " Run: " << r << " Fit: " << eliteFit << " Time: " << t1 << endl;
-				for (n = 0; n < VSIZE+1; n++)
+				for (n = 0; n < vsize+1; n++)
 					myfile <<  champTour.at(n) << ", ";
 				myfile <<  endl;
 
