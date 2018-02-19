@@ -53,7 +53,7 @@ double fitness(vector<long> tour) {
 long partSearch(vector<long> p, long c) {
 	long pos = 0-1;
 	long s = 0;
-	while (pos!=c && s<VSIZE) {
+	while (pos!=c && s<vsize) {
 		s++;
 		pos=p[s];
 	}
@@ -68,7 +68,7 @@ vector<long> compat(vector<long> p1, vector<long> p2) {
 	valid=false;
 	bool running = true;
 	if (p1[0] == p2[0]) {
-		while (i2<VSIZE && running) {
+		while (i2<vsize && running) {
 			//cout << "Search " << i2 << ": " << endl;
 			crossover.clear();
 			part.clear();
@@ -76,14 +76,14 @@ vector<long> compat(vector<long> p1, vector<long> p2) {
 			//Flip the beginning of our partition:
 			temp[p1[0]]= 0-1;
 			//Assign the city we are searching for in p2 to match the city in p1:
-			search=rand()%VSIZE;
+			search=rand()%vsize;
 			i1=1;
 			//Begin search
 			
-			while(i1<(VSIZE/2)) {
+			while(i1<(vsize/2)) {
 				found = partSearch(p2,p1[search]);
 				if (temp[found]==-1)
-					i1=VSIZE;
+					i1=vsize;
 				else {
 					crossover.push_back(found);
 					part.push_back(p2[found]);
@@ -113,15 +113,15 @@ vector<long> Mutate(vector<long> child) {
 	long mut2;
 	long r1 = 0;
 	long ctemp;
-	while (r1 < VSIZE/MUTE) {
+	while (r1 < vsize/MUTE) {
 		p = child;
-		mut1 = rand()%(VSIZE-4)+2;
-		mut2 = rand()%(VSIZE-4)+2;
+		mut1 = rand()%(vsize-4)+2;
+		mut2 = rand()%(vsize-4)+2;
 		if (mut1==mut2) {
-				if (mut2>=(VSIZE/2))
-					mut2-=rand()%(VSIZE/2);
+				if (mut2>=(vsize/2))
+					mut2-=rand()%(vsize/2);
 				else
-					mut2+=rand()%(VSIZE/2);
+					mut2+=rand()%(vsize/2);
 		}
 		ctemp = p[mut1];
 		p[mut1] = p[mut2];

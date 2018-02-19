@@ -10,21 +10,23 @@
 #include <fstream>
 #include <string>
 #include <utility>
-
+#include "getArgs_GATSP.h"
 #define GENERATION_SIZE 4
 #define RUNS 10000
-#define VSIZE 101
+#define vsize 101
 #define OPTFREQ 70
 #define MUTE 5
+
+
 using namespace std;
-string file = "C:/Temp/NSC400/GATSP/eil101.txt";
+string root = "C:/Temp/NSC400/GATSP/";
 long rr;
 //Counter variables
 long i, j, k, l , m , n, z=0, u, eliteTour, c1, c2, swapper,swap2,eliteRun;
 
 long xval,yval, dist, average;
 
-long **weights = new long *[VSIZE];
+long **weights = new long *[vsize];
 long lastC;
 bool valid,immigrate=false;
 vector<long> track;
@@ -56,7 +58,7 @@ double * BubbleSort(double * sortinglist) {
 
 void writeTour(vector<long> tour) {
 	ofstream tourFile;
-	tourFile.open("C:/Temp/NSC400/GATSP/Tour.txt");
+	tourFile.open(root+"Tour.txt");
 	for (i = 0; i< tour.size();i++) {
 		tourFile << i << " "<< weights[tour[i]][0] << " " << weights[tour[i]][1] << endl;
 	}
@@ -74,11 +76,11 @@ void prlongArray( long * a, long num) {
 
 long getBound() {
 	long bound =0;
-	for (int i=0;i<VSIZE-1;i++)
+	for (int i=0;i<vsize-1;i++)
 		bound += sqrt((pow(weights[i+1][0]-weights[i][0],2))+(pow(weights[i+1][1]-weights[i][1],2)));
-	bound += sqrt((pow(weights[VSIZE-1][0]-weights[0][0],2))+(pow(weights[VSIZE-1][1]-weights[0][1],2)));
+	bound += sqrt((pow(weights[vsize-1][0]-weights[0][0],2))+(pow(weights[vsize-1][1]-weights[0][1],2)));
 	//cout << "Max Dist: " <<bound<< endl;
-	bound= bound/VSIZE;
+	bound= bound/vsize;
 	//cout<< "Bound: " <<bound << endl;
 	return bound;
 }
@@ -88,7 +90,7 @@ void getMap() {
 	char* read;
 	
 	tsp.open(file);
-	for (i = 0; i < VSIZE; i++) {
+	for (i = 0; i < vsize; i++) {
 		track.push_back(i);
 		tsp.getline(read,100,' ');
 		if (atoi(read) == i+1) {
@@ -127,7 +129,7 @@ vector<long> randTour(long bound) {
 	ind.push_back(temp[0]);
 	temp.erase(temp.begin());
 	//find the next city
-	for (int i=1;i<VSIZE;i++) {
+	for (int i=1;i<vsize;i++) {
 		city = nearestNeighbor(temp,ind.back(),bound);
 		ind.push_back(temp[city]);
 		temp.erase(temp.begin() + city);
