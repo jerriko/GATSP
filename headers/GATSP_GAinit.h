@@ -19,7 +19,7 @@
 
 
 using namespace std;
-string root = "C:/Temp/NSC400/GATSP/";
+string root = "C:/Temp/NSC400/GATSP/source/";
 long rr;
 //Counter variables
 long i, j, k, l , m , n, z=0, u, eliteTour, c1, c2, swapper,swap2,eliteRun;

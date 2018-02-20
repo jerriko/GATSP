@@ -1,5 +1,5 @@
-#include "GATSP_GAinit.h"
-#include "GAFuncs.h"
+#include "../headers/GATSP_GAinit.h"
+#include "../headers/GAFuncs.h"
 
 vector<long> twoOpt (vector<long> tour) {
 	//cout << "Entering 2opt" << endl;
