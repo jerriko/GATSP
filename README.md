@@ -12,4 +12,5 @@
 ## To-Do
 * Multi-threading capability
 * Graphic to show current elite tour as the program runs
+** use node.js to serve
 * ~~Add switch commands~~
